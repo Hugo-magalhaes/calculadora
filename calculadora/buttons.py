@@ -74,6 +74,7 @@ class ButtonsGrid(QGridLayout):
         self.display.clear_pressed.connect(self._clear)
         self.display.input_pressed.connect(self._insert_in_display)
         self.display.operator_pressed.connect(self._operator_config)
+        self.display.invert_signal_pressed.connect(self._invert_signal)
 
         for i, row in enumerate(self._grid_mask):
             for j, button_text in enumerate(row):
@@ -128,8 +129,7 @@ class ButtonsGrid(QGridLayout):
                 button, self._backspace)
 
         if text.lower() == 'n':
-            self._connect_button_clicked(button,
-                                         self._invert_signal)
+            self._connect_button_clicked(button, self._invert_signal)
 
         if text in '+-/*^':
             self._connect_button_clicked(

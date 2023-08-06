@@ -31,6 +31,7 @@ class Display(QLineEdit):
     clear_pressed = Signal()
     input_pressed = Signal(str)
     operator_pressed = Signal(str)
+    invert_signal_pressed = Signal()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -68,6 +69,10 @@ class Display(QLineEdit):
 
         if is_esc:
             self.clear_pressed.emit()
+            return event.ignore()
+
+        if text.lower() == 'n':
+            self.invert_signal_pressed.emit()
             return event.ignore()
 
         if is_operator:
